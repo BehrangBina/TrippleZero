@@ -3,7 +3,7 @@ using Microsoft.Playwright;
 
 namespace TrippleZero.Utils
 {
-    public class TestBase : IAsyncLifetime
+  public class TestBase
     {
         protected IPlaywright _playwright;
         protected IBrowser _browser;
@@ -11,7 +11,7 @@ namespace TrippleZero.Utils
         private readonly string _browserType;
 
         public TestBase(string browserType)
-        {        
+        {
             _browserType = browserType;
         }
 
