@@ -1,5 +1,7 @@
+using Microsoft.Extensions.Logging;
 using TrippleZero.Pages;
 using TrippleZero.Utils;
+using Xunit.Abstractions;
 
 namespace TrippleZero.StepDefinitions
 {
@@ -7,9 +9,12 @@ namespace TrippleZero.StepDefinitions
     public class LoginSteps : TestBase
     {
         private readonly LoginPage _loginPage;
+        private ILogger<LoginSteps> _logger;
 
-        public LoginSteps() : base("chromium") // You can change "chromium" to any browser type you want to use
+
+        public LoginSteps(ITestOutputHelper output) : base("chromium") // You can change "chromium" to any browser type you want to use
         {
+            _logger = output.ToLogger<LoginSteps>();
             InitializeAsync().GetAwaiter().GetResult();
             _loginPage = new LoginPage(_page);
         }

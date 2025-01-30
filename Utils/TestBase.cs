@@ -1,9 +1,10 @@
 ﻿
+using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 
 namespace TrippleZero.Utils
 {
-  public class TestBase
+  public class TestBase:IAsyncLifetime
     {
         protected IPlaywright _playwright;
         protected IBrowser _browser;
@@ -12,7 +13,8 @@ namespace TrippleZero.Utils
 
         public TestBase(string browserType)
         {
-            _browserType = browserType;
+            var configuration = SetupAppsettings();
+            _browserType = configuration["BrowserType"] ?? "chromium";           
         }
 
         public async Task InitializeAsync()
@@ -27,6 +29,16 @@ namespace TrippleZero.Utils
         {
             await _browser.CloseAsync();
             _playwright.Dispose();
+        }
+
+        private IConfiguration SetupAppsettings()
+        {
+           return new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(Environment.GetCommandLineArgs())
+                .Build(); 
         }
     }
 }
