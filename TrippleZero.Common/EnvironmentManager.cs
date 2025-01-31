@@ -18,6 +18,7 @@ namespace TrippleZero.Common
 
             _configurationDictionary = new Lazy<Dictionary<string, string>>(() =>
             {
+                 
                 var environment = configuration["Environment"];
                 if (string.IsNullOrEmpty(environment))
                 {
@@ -30,9 +31,13 @@ namespace TrippleZero.Common
                     throw new ArgumentNullException($"The configuration section for the environment '{environment}' is not found");
                 }
 
-                return section.AsEnumerable()
-                              .Where(kv => !string.IsNullOrEmpty(kv.Value))
-                              .ToDictionary(kv => kv.Key.Replace($"{environment}:", ""), kv => kv.Value ?? string.Empty);
+                var keyPair = section.AsEnumerable()
+                                      .Where(kv => !string.IsNullOrEmpty(kv.Value))
+                                      .ToDictionary(kv => kv.Key.Replace($"{environment}:", "", 
+                                      StringComparison.OrdinalIgnoreCase), kv => kv.Value ?? 
+                                      string.Empty, StringComparer.OrdinalIgnoreCase);
+                keyPair.Add("Environment", environment);
+                return keyPair;
             });
         }
 
@@ -40,7 +45,8 @@ namespace TrippleZero.Common
         {
             if (!_configurationDictionary.Value.TryGetValue(key, out var value))
             {
-                throw new ArgumentNullException($"The key '{key}' is not found in the configuration for the environment '{_configurationDictionary.Value["Environment"]}'");
+                var message = $"The key '{key}' is not found in the configuration for the environment '{_configurationDictionary.Value["Environment"]}'";
+                throw new ArgumentNullException(message);
             }
 
             return value;

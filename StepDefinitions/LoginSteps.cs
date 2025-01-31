@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using TrippleZero.Common;
 using TrippleZero.Pages;
 using TrippleZero.Utils;
 using Xunit.Abstractions;
@@ -10,9 +11,9 @@ namespace TrippleZero.StepDefinitions
     {
         private readonly LoginPage _loginPage;
         private ILogger<LoginSteps> _logger;
+        private static string _browserType = EnvironmentManager.GetOrThrow("BrowserType");
 
-
-        public LoginSteps(ITestOutputHelper output) : base("chromium") // You can change "chromium" to any browser type you want to use
+        public LoginSteps(ITestOutputHelper output) : base(_browserType) // You can change "chromium" to any browser type you want to use
         {
             _logger = output.ToLogger<LoginSteps>();
             InitializeAsync().GetAwaiter().GetResult();

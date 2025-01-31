@@ -16,7 +16,7 @@ namespace TrippleZero
         [Trait("Category", "Unit")]
         [InlineData("BaseUrl", "https://www.saucedemo.com/")]
         [InlineData("BrowserType", "chromium")]
-        [InlineData("standard_user", "standard_user")]
+        [InlineData("Standard_user", "standard_user")]
         [InlineData("locked_out_user", "locked_out_user")]
         [InlineData("problem_user", "problem_user")]
         [InlineData("performance_glitch_user", "performance_glitch_user")]
