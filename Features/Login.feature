@@ -1,7 +1,7 @@
 ﻿@login
 Feature: Login
 
-  Scenario: Successful login with valid credentials
+Scenario: Successful login with standard user
     Given I navigate to the login page
     When I enter valid username and password
     And I click the login button

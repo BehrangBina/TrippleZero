@@ -94,16 +94,16 @@ namespace TrippleZero.Features
             await this.TestTearDownAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Successful login with valid credentials")]
+        [Xunit.SkippableFactAttribute(DisplayName="Successful login with standard user")]
         [Xunit.TraitAttribute("FeatureTitle", "Login")]
-        [Xunit.TraitAttribute("Description", "Successful login with valid credentials")]
-        public async System.Threading.Tasks.Task SuccessfulLoginWithValidCredentials()
+        [Xunit.TraitAttribute("Description", "Successful login with standard user")]
+        public async System.Threading.Tasks.Task SuccessfulLoginWithStandardUser()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Successful login with valid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Successful login with standard user", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
-  this.ScenarioInitialize(scenarioInfo);
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
