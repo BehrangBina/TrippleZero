@@ -11,18 +11,15 @@ namespace TrippleZero.Utils
         protected IPage _page;
         private readonly string _browserType;
 
-        public TestBase(string browserType)
-        {
-            var configuration = SetupAppsettings();
-            _browserType = configuration["BrowserType"] ?? "chromium";           
-        }
+        public TestBase(string browserType) => _browserType = browserType;
 
         public async Task InitializeAsync()
         {
             _playwright = await Playwright.CreateAsync();
             _browser = await _playwright[_browserType].LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
             _page = await _browser.NewPageAsync();
-            await _page.GotoAsync("https://www.saucedemo.com");
+            await _page.SetViewportSizeAsync(1920, 1080);
+            await _page.GotoAsync(Endpoints.BaseUrl);
         }
 
         public async Task DisposeAsync()
@@ -31,14 +28,5 @@ namespace TrippleZero.Utils
             _playwright.Dispose();
         }
 
-        private IConfiguration SetupAppsettings()
-        {
-           return new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .AddCommandLine(Environment.GetCommandLineArgs())
-                .Build(); 
-        }
     }
 }

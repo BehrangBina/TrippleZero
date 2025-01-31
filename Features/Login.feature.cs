@@ -20,13 +20,15 @@ namespace TrippleZero.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Xunit.TraitAttribute("Category", "login")]
+    [Xunit.TraitAttribute("Category", "online")]
     public partial class LoginFeature : object, Xunit.IClassFixture<LoginFeature.FixtureData>, Xunit.IAsyncLifetime
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = new string[] {
-                "login"};
+                "login",
+                "online"};
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Login", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         

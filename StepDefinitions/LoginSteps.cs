@@ -34,7 +34,7 @@ namespace TrippleZero.StepDefinitions
             var password = EnvironmentManager.GetOrThrow("Password");
             _logger.LogInformation($"Username: {username}, Password: {password}");
             await _loginPage.EnterUsername(username);
-            await _loginPage.EnterPassword(username);
+            await _loginPage.EnterPassword(password);
         }
 
         [When("I enter invalid username and password")]
@@ -61,7 +61,11 @@ namespace TrippleZero.StepDefinitions
         public async Task ThenIShouldSeeAnErrorMessage()
         {
             var errorMessage = await _loginPage.GetErrorMessage();
-            Assert.Contains("Username and password do not match any user in this service", errorMessage);
+            errorMessage
+                .Should()
+                .NotBeNullOrEmpty("Error message should not be empty")
+                .And
+                .Be("Username and password do not match any user in this service");
         }
     }
 }

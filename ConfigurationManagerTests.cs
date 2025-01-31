@@ -11,7 +11,7 @@ namespace TrippleZero
 
         [Theory(DisplayName = "Can Read Config Value")]
         [Trait("Category", "Unit")]
-        [InlineData("BaseUrl", "https://www.saucedemo.com/")]
+        [InlineData("BaseUrl", "https://www.saucedemo.com")]
         [InlineData("BrowserType", "chromium")]
         [InlineData("Standard_user", "standard_user")]
         [InlineData("locked_out_user", "locked_out_user")]
@@ -24,7 +24,7 @@ namespace TrippleZero
         {
             var value = EnvironmentManager.GetOrThrow(key);
             _logger.LogInformation($"Key: {key}, Value: {value}");
-            Assert.Equal(expectedValue, value);
+            value.Should().Be(expectedValue,"Value does not match");   
         }
     }
 }

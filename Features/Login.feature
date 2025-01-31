@@ -1,4 +1,4 @@
-﻿@login
+﻿@login @online
 Feature: Login
 
 Scenario: Successful login with standard user
