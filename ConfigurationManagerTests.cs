@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using TrippleZero.Common;
-using Xunit.Abstractions;
-
+﻿using TrippleZero.Common;
 namespace TrippleZero
 {
     public class ConfigurationManagerTests

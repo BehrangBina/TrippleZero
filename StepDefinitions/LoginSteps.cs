@@ -1,8 +1,6 @@
-using Microsoft.Extensions.Logging;
 using TrippleZero.Common;
 using TrippleZero.Pages;
 using TrippleZero.Utils;
-using Xunit.Abstractions;
 
 namespace TrippleZero.StepDefinitions
 {
@@ -16,6 +14,7 @@ namespace TrippleZero.StepDefinitions
         public LoginSteps(ITestOutputHelper output) : base(_browserType) // You can change "chromium" to any browser type you want to use
         {
             _logger = output.ToLogger<LoginSteps>();
+            _logger.LogInformation($"Browser Type: {_browserType}");
             InitializeAsync().GetAwaiter().GetResult();
             _loginPage = new LoginPage(_page);
         }
@@ -23,14 +22,19 @@ namespace TrippleZero.StepDefinitions
         [Given("I navigate to the login page")]
         public async Task GivenINavigateToTheLoginPage()
         {
-            await _page.GotoAsync("https://www.saucedemo.com");
+            var url = Endpoints.BaseUrl;
+            _logger.LogInformation($"Navigating to {url}");
+            await _page.GotoAsync(url);
         }
 
         [When("I enter valid username and password")]
         public async Task WhenIEnterValidUsernameAndPassword()
         {
-            await _loginPage.EnterUsername("standard_user");
-            await _loginPage.EnterPassword("secret_sauce");
+            var username = EnvironmentManager.GetOrThrow("Standard_user");
+            var password = EnvironmentManager.GetOrThrow("Password");
+            _logger.LogInformation($"Username: {username}, Password: {password}");
+            await _loginPage.EnterUsername(username);
+            await _loginPage.EnterPassword(username);
         }
 
         [When("I enter invalid username and password")]
@@ -49,7 +53,8 @@ namespace TrippleZero.StepDefinitions
         [Then("I should be redirected to the inventory page")]
         public void ThenIShouldBeRedirectedToTheInventoryPage()
         {
-            Assert.Equal("https://www.saucedemo.com/inventory.html", _page.Url);
+            var expectedUrl = Endpoints.InventoryPage;
+            expectedUrl.Should().Be(_page.Url,$"Url should be {expectedUrl}");           
         }
 
         [Then("I should see an error message")]

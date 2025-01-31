@@ -9,6 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="8.0.1" />
+        <PackageReference Include="FluentValidation" Version="11.11.0" />
         <PackageReference Include="MartinCostello.Logging.XUnit" Version="0.5.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1">
           <TreatAsUsed>true</TreatAsUsed>
