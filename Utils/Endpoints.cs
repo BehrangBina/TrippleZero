@@ -6,5 +6,7 @@ namespace TrippleZero.Utils
     {
         public static string BaseUrl = EnvironmentManager.GetOrThrow("BaseUrl");
         public static string InventoryPage = $"{BaseUrl}/inventory.html";
+        public static string CartPage = $"{BaseUrl}/cart.html";
+        public static string CheckoutPageStep1 = $"{BaseUrl}/checkout-step-one.html";
     }
 }

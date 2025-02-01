@@ -19,25 +19,21 @@ namespace TrippleZero.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [Xunit.TraitAttribute("Category", "Login")]
-    [Xunit.TraitAttribute("Category", "Online")]
-    public partial class LoginFeature : object, Xunit.IClassFixture<LoginFeature.FixtureData>, Xunit.IAsyncLifetime
+    public partial class ProductPurchaseFeature : object, Xunit.IClassFixture<ProductPurchaseFeature.FixtureData>, Xunit.IAsyncLifetime
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = new string[] {
-                "Login",
-                "Online"};
+        private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Login", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "ProductPurchase", "Logged in User Can Purchase a Product", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "Login.feature"
+#line 1 "ProductPurchase.feature"
 #line hidden
         
-        public LoginFeature(LoginFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public ProductPurchaseFeature(ProductPurchaseFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
         }
@@ -96,15 +92,21 @@ namespace TrippleZero.Features
             await this.TestTearDownAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Successful login with standard user")]
-        [Xunit.TraitAttribute("FeatureTitle", "Login")]
-        [Xunit.TraitAttribute("Description", "Successful login with standard user")]
-        public async System.Threading.Tasks.Task SuccessfulLoginWithStandardUser()
+        [Xunit.SkippableFactAttribute(DisplayName="Logged in User Can Purchase a Product")]
+        [Xunit.TraitAttribute("FeatureTitle", "ProductPurchase")]
+        [Xunit.TraitAttribute("Description", "Logged in User Can Purchase a Product")]
+        [Xunit.TraitAttribute("Category", "StandardUserAuthenticated")]
+        [Xunit.TraitAttribute("Category", "Online")]
+        [Xunit.TraitAttribute("Category", "ProductPurchase")]
+        public async System.Threading.Tasks.Task LoggedInUserCanPurchaseAProduct()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "StandardUserAuthenticated",
+                    "Online",
+                    "ProductPurchase"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Successful login with standard user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 4
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Logged in User Can Purchase a Product", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -114,51 +116,53 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 5
-    await testRunner.GivenAsync("I navigate to the login page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 6
-    await testRunner.WhenAsync("I enter valid username and password", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
 #line 7
-    await testRunner.AndAsync("I click the login button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.GivenAsync("I am in the inventory page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 8
-    await testRunner.ThenAsync("I should be redirected to the inventory page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.WhenAsync("From products list I Add to cart \"Sauce Labs Fleece Jacket\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Unsuccessful login with invalid credentials")]
-        [Xunit.TraitAttribute("FeatureTitle", "Login")]
-        [Xunit.TraitAttribute("Description", "Unsuccessful login with invalid credentials")]
-        public async System.Threading.Tasks.Task UnsuccessfulLoginWithInvalidCredentials()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Unsuccessful login with invalid credentials", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 9
+ await testRunner.ThenAsync("I add to cart button should change to remove", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
 #line 10
-  this.ScenarioInitialize(scenarioInfo);
+ await testRunner.AndAsync("I should see the cart badge with 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
 #line 11
-    await testRunner.GivenAsync("I navigate to the login page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.WhenAsync("I click the cart button", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 12
-    await testRunner.WhenAsync("I enter invalid username and password", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.ThenAsync("I should see the product in the cart", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
 #line 13
-    await testRunner.AndAsync("I click the login button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync("I should see the product price", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 14
-    await testRunner.ThenAsync("I should see an error message", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.AndAsync("I should see the checkout button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 15
+ await testRunner.WhenAsync("I click the checkout button", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 16
+ await testRunner.ThenAsync("I should see the checkout page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 17
+ await testRunner.AndAsync("I am on \"checkout-step-one\" page", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 18
+ await testRunner.WhenAsync("I fill the checkout form", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 19
+ await testRunner.AndAsync("I click the continue button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 20
+ await testRunner.ThenAsync("I am on \"checkout-step-two\" page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 22
+ await testRunner.ThenAsync("I click on the finish button", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 23
+ await testRunner.ThenAsync("I should see the checkout-complete page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -171,12 +175,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             async System.Threading.Tasks.Task Xunit.IAsyncLifetime.InitializeAsync()
             {
-                await LoginFeature.FeatureSetupAsync();
+                await ProductPurchaseFeature.FeatureSetupAsync();
             }
             
             async System.Threading.Tasks.Task Xunit.IAsyncLifetime.DisposeAsync()
             {
-                await LoginFeature.FeatureTearDownAsync();
+                await ProductPurchaseFeature.FeatureTearDownAsync();
             }
         }
     }

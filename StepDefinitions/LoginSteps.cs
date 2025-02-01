@@ -10,13 +10,14 @@ namespace TrippleZero.StepDefinitions
         private readonly LoginPage _loginPage;
         private ILogger<LoginSteps> _logger;
         private static string _browserType = EnvironmentManager.GetOrThrow("BrowserType");
-
-        public LoginSteps(ITestOutputHelper output) : base(_browserType) // You can change "chromium" to any browser type you want to use
+        private ScenarioContext _scenarioContext;
+        public LoginSteps(ScenarioContext scenarioContext,ITestOutputHelper output) : base(_browserType) // You can change "chromium" to any browser type you want to use
         {
             _logger = output.ToLogger<LoginSteps>();
             _logger.LogInformation($"Browser Type: {_browserType}");
             InitializeAsync().GetAwaiter().GetResult();
             _loginPage = new LoginPage(_page);
+            _scenarioContext = scenarioContext;
         }
 
         [Given("I navigate to the login page")]
@@ -47,7 +48,9 @@ namespace TrippleZero.StepDefinitions
         [When("I click the login button")]
         public async Task WhenIClickTheLoginButton()
         {
-            await _loginPage.ClickLogin();
+            await _loginPage.ClickLogin();            
+            _scenarioContext.Add("currentUrl", _page.Url);
+            _scenarioContext.Add("currentPage", _page);
         }
 
         [Then("I should be redirected to the inventory page")]
