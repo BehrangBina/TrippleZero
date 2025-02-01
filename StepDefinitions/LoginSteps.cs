@@ -65,7 +65,7 @@ namespace TrippleZero.StepDefinitions
                 .Should()
                 .NotBeNullOrEmpty("Error message should not be empty")
                 .And
-                .Be("Username and password do not match any user in this service");
+                .Be("Epic sadface: Username and password do not match any user in this service","Error Message Did Not Match");
         }
     }
 }
