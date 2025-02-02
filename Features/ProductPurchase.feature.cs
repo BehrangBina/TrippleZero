@@ -163,6 +163,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 21
  await testRunner.ThenAsync("I am on \"checkout-step-two\" page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
+#line 22
+ await testRunner.AndAsync("I Validate Checkout Second Page", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
 #line 23
  await testRunner.ThenAsync("I click on the finish button", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden

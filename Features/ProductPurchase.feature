@@ -19,6 +19,6 @@ Scenario: Logged in User Can Purchase a Product
 		| John       | Doe       | 3000        |
 	And I click the continue button
 	Then I am on "checkout-step-two" page
-	# TBI Validatation
+	And I Validate Checkout Second Page
 	Then I click on the finish button
 	Then I should see the checkout-complete page

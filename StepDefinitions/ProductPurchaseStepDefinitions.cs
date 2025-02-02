@@ -126,7 +126,7 @@ namespace TrippleZero.StepDefinitions
         [Then("I click on the finish button")]
         public async Task ThenIClickOnTheFinishButton()
         {
-            throw new PendingStepException();
+            await _checkoutPage.ClickFinish();
         }
 
         [Then("I should see the checkout-complete page")]
@@ -134,6 +134,12 @@ namespace TrippleZero.StepDefinitions
         {
             throw new PendingStepException();
         }
+        [Then("I Validate Checkout Second Page")]
+        public async Task ThenIValidateCheckoutSecondPage()
+        {
+           await _checkoutPage.ValidateCheckoutSecondPage();
+        }
+
     }
 }
  
