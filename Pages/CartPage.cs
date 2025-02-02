@@ -9,7 +9,7 @@ namespace TrippleZero.Pages
         private ILogger _logger;
         private string ItemPrice = "[data-test='inventory-item-price']";
         private string ItemName = "[data-test='inventory-item-name']";
-        private string Checkoout = "[data-test='checkout']";
+        private string Checkout = "[data-test='checkout']";
 
 
         public CartPage(IPage page, ScenarioContext ScenarioContext, ILogger logger)
@@ -38,13 +38,13 @@ namespace TrippleZero.Pages
 
         internal async Task CheckCheckoutButton()
         {
-            var checkoutButton = await _page.QuerySelectorAsync(Checkoout);
+            var checkoutButton = await _page.QuerySelectorAsync(Checkout);
             checkoutButton.Should().NotBeNull("Checkout button should be visible");
         }
 
         internal async Task ClickCheckoutButton()
         {
-            var checkoutButton = await _page.QuerySelectorAsync(Checkoout);
+            var checkoutButton = await _page.QuerySelectorAsync(Checkout);
             await checkoutButton!.ClickAsync();
         }
     }
