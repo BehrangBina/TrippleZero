@@ -172,6 +172,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 24
  await testRunner.ThenAsync("I should see the checkout-complete page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
+#line 25
+ await testRunner.AndAsync("I should see the thank you message", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
             }
             await this.ScenarioCleanupAsync();
         }

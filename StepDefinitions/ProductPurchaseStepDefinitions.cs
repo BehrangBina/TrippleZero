@@ -11,6 +11,7 @@ namespace TrippleZero.StepDefinitions
         private readonly InventoryPage _inventoryPage;
         private readonly CartPage _cartPage;
         private readonly CheckoutPage _checkoutPage;
+        private readonly CheckoutCompletePage _checkoutCompetePage;
 
         private ILogger<LoginStepDefinitions> _logger;
         private static string _browserType = EnvironmentManager.GetOrThrow("BrowserType");
@@ -20,10 +21,11 @@ namespace TrippleZero.StepDefinitions
             _logger = output.ToLogger<LoginStepDefinitions>();
             _logger.LogInformation($"Browser Type: {_browserType}");
             _scenarioContext = scenarioContext;
+
             _inventoryPage = new InventoryPage(_page ?? _scenarioContext.Get<IPage>("currentPage"), _scenarioContext, _logger);
             _cartPage = new CartPage(_page ?? _scenarioContext.Get<IPage>("currentPage"), _scenarioContext, _logger);
             _checkoutPage = new CheckoutPage(_page ?? _scenarioContext.Get<IPage>("currentPage"), _scenarioContext, _logger);
-
+            _checkoutCompetePage = new CheckoutCompletePage(_page ?? _scenarioContext.Get<IPage>("currentPage"), _scenarioContext, _logger);
         }
 
 
@@ -130,16 +132,23 @@ namespace TrippleZero.StepDefinitions
         }
 
         [Then("I should see the checkout-complete page")]
-        public async Task ThenIShouldSeeTheCheckout_CompletePage()
+        public void ThenIShouldSeeTheCheckout_CompletePage()
         {
-            throw new PendingStepException();
+            var expectedUrl = Endpoints.CheckoutComplete;
+            var currentUrl = _page.Url;
+            _logger.LogInformation("Current Url is: {0}", currentUrl);
+            currentUrl.Should().Contain(expectedUrl, $"Current url: {currentUrl} does not contain {expectedUrl}");
         }
         [Then("I Validate Checkout Second Page")]
         public async Task ThenIValidateCheckoutSecondPage()
         {
            await _checkoutPage.ValidateCheckoutSecondPage();
         }
-
+        [Then("I should see the thank you message")]
+        public async Task ThenIShouldSeeTheThankYouMessage()
+        {
+            await _checkoutCompetePage.ValidateThankYouMessage();
+        }
     }
 }
  
