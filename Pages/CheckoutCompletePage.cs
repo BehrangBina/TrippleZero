@@ -8,8 +8,8 @@ namespace TrippleZero.Pages
         private ScenarioContext _scenarioContext;
         private ILogger _logger;
         private string PageTitle = "[data-test='title']";
-        private string CompleteHeader = "[data-test='complete-header']";  
-        private string CompleteText = "[data-test='complete-text']";        
+        private string CompleteHeader = "[data-test='complete-header']";
+        private string CompleteText = "[data-test='complete-text']";
         private string BackToHomeButton = "[data-test='back-to-products']";
 
         private const string PageTitleText = "Checkout: Complete!";

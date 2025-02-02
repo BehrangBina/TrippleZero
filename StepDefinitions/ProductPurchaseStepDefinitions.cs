@@ -16,7 +16,7 @@ namespace TrippleZero.StepDefinitions
         private ILogger<LoginStepDefinitions> _logger;
         private static string _browserType = EnvironmentManager.GetOrThrow("BrowserType");
         private ScenarioContext _scenarioContext;
-        public ProductPurchaseStepDefinitions(ScenarioContext scenarioContext, ITestOutputHelper output) : base(_browserType) 
+        public ProductPurchaseStepDefinitions(ScenarioContext scenarioContext, ITestOutputHelper output) : base(_browserType)
         {
             _logger = output.ToLogger<LoginStepDefinitions>();
             _logger.LogInformation($"Browser Type: {_browserType}");
@@ -103,7 +103,7 @@ namespace TrippleZero.StepDefinitions
             var currentUrl = _page.Url;
             _logger.LogInformation("Current Url is: {0}", currentUrl);
             currentUrl.Should().Contain(pageName, $"Current url: {currentUrl} does not contain {pageName}");
-            
+
         }
 
         [When("I fill the checkout form")]
@@ -115,7 +115,7 @@ namespace TrippleZero.StepDefinitions
             var lastName = firstRow["Last Name"];
             var postalCode = firstRow["Postal Code"];
             _logger.LogInformation($"Filling the checkout form with {firstName}, {lastName}, {postalCode}");
-          await  _checkoutPage.FillCheckoutForm(firstName, lastName, postalCode); 
+            await _checkoutPage.FillCheckoutForm(firstName, lastName, postalCode);
         }
 
 
@@ -142,7 +142,7 @@ namespace TrippleZero.StepDefinitions
         [Then("I Validate Checkout Second Page")]
         public async Task ThenIValidateCheckoutSecondPage()
         {
-           await _checkoutPage.ValidateCheckoutSecondPage();
+            await _checkoutPage.ValidateCheckoutSecondPage();
         }
         [Then("I should see the thank you message")]
         public async Task ThenIShouldSeeTheThankYouMessage()
@@ -151,4 +151,3 @@ namespace TrippleZero.StepDefinitions
         }
     }
 }
- 

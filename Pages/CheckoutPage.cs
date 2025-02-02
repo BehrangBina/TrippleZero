@@ -20,9 +20,9 @@ namespace TrippleZero.Pages
         private const string ShoppingInfoLableValue = "[data-test='shipping-info-value']";
         private const string FinishButton = "[data-test='finish']";
         private const string TotalInfoLabel = "[data-test='total-info-label']";
-        private const string TotalInfoValue = "[data-test='subtotal-label']"; 
-   //     private const string ItemTotal = "[data-test='subtotal-label']";
-   //     private const string Tax = "[data-test='tax-label']";
+        private const string TotalInfoValue = "[data-test='subtotal-label']";
+        //     private const string ItemTotal = "[data-test='subtotal-label']";
+        //     private const string Tax = "[data-test='tax-label']";
         private const string TaxLabel = "[data-test='tax-label']";
         private const string TotalLabel = "[data-test='total-label']";
 
@@ -78,7 +78,7 @@ namespace TrippleZero.Pages
             await ValidateProductPrice();
             await ValidateIformationElements();
             await ValidateShippingInformationElements();
-            await VaidateTotalElements();          
+            await VaidateTotalElements();
 
         }
 
@@ -96,7 +96,7 @@ namespace TrippleZero.Pages
                 .Should().NotBeNullOrWhiteSpace("Toal Info should have value")
                 .And.Contain(price, "Price should match");
             _logger.LogInformation("Validate  Total and Tax");
-           var taxLabel = await _page.Locator(TaxLabel).TextContentAsync();
+            var taxLabel = await _page.Locator(TaxLabel).TextContentAsync();
             taxLabel.Should().NotBeNullOrEmpty("Tax value shoudl be visible");
             decimal taxValue;
             taxLabel = taxLabel.Replace("Tax: $", "").Trim();
@@ -108,7 +108,7 @@ namespace TrippleZero.Pages
 
         private async Task ValidateShippingInformationElements()
         {
-           var shippingLabel = await _page.Locator(ShoppingInfoLable).TextContentAsync();
+            var shippingLabel = await _page.Locator(ShoppingInfoLable).TextContentAsync();
             shippingLabel.Should().NotBeNullOrEmpty("Shipping Information label on page is empty");
             var shippingLabelValue = await _page.Locator(ShoppingInfoLableValue).TextContentAsync();
             shippingLabelValue.Should().NotBeNullOrEmpty("Shipping Information value on page is empty");

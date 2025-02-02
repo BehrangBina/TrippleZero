@@ -10,7 +10,7 @@ namespace TrippleZero.Pages
         private ILogger _logger;
         private string DropDownMenu = "#react-burger-menu-btn";
         private string LogoutSidebarLink = "[data-test='logout-sidebar-link']";
-      
+
         public LogoutPage(IPage page, ScenarioContext ScenarioContext, ILogger logger)
         {
             _page = page;
@@ -34,7 +34,7 @@ namespace TrippleZero.Pages
 
         internal async Task CheckThatUserIsLogout()
         {
-            _logger.LogInformation("Checking if user is logged out");            
+            _logger.LogInformation("Checking if user is logged out");
             var url = _page.Url;
             url.Should().Contain(Endpoints.BaseUrl, "User should be in home page");
             _logger.LogInformation("Checking if dropdown exists");
@@ -45,7 +45,7 @@ namespace TrippleZero.Pages
         internal async Task ClickOnDropdown()
         {
             _logger.LogInformation("Clicking on dropdown");
-            var menu =await _page.QuerySelectorAsync(DropDownMenu);
+            var menu = await _page.QuerySelectorAsync(DropDownMenu);
             menu.Should().NotBeNull("Dropdown should be visible");
             await menu.ClickAsync();
         }

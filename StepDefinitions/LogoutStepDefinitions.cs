@@ -9,7 +9,7 @@ namespace TrippleZero.StepDefinitions
     public class LogoutStepDefinitions : TestBase
     {
         private readonly LogoutPage _logoutPage;
-        private ILogger  _logger;
+        private ILogger _logger;
         private static string _browserType = EnvironmentManager.GetOrThrow("BrowserType");
         private ScenarioContext _scenarioContext;
         public LogoutStepDefinitions(ScenarioContext scenarioContext, ITestOutputHelper output) : base(_browserType) // You can change "chromium" to any browser type you want to use
@@ -35,7 +35,7 @@ namespace TrippleZero.StepDefinitions
         [Then("The user sees the Logout button")]
         public async Task ThenTheUserSeesTheLogoutButton()
         {
-           await _logoutPage.CheckLogoutButton();
+            await _logoutPage.CheckLogoutButton();
         }
 
         [When("The user clicks on the Logout button")]
