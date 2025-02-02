@@ -4,9 +4,9 @@ namespace TrippleZero.Utils
 {
     public class TestBase : IAsyncLifetime
     {
-        protected IPlaywright _playwright;
-        protected IBrowser _browser;
-        protected IPage _page;
+        protected IPlaywright? _playwright;
+        protected IBrowser? _browser;
+        protected IPage? _page;
         private readonly string _browserType;
 
         public TestBase(string browserType) => _browserType = browserType;
@@ -17,13 +17,14 @@ namespace TrippleZero.Utils
             _browser = await _playwright[_browserType].LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
             _page = await _browser.NewPageAsync();
             await _page.SetViewportSizeAsync(1920, 1080);
+            // Set test id attribute to all elements
             await _page.GotoAsync(Endpoints.BaseUrl);
         }
 
         public async Task DisposeAsync()
         {
-            await _browser.CloseAsync();
-            _playwright.Dispose();
+            if(_browser != null) await _browser.CloseAsync();
+            _playwright?.Dispose();
         }
 
     }
