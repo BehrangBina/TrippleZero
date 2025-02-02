@@ -1,10 +1,8 @@
-﻿
-using Microsoft.Extensions.Configuration;
-using Microsoft.Playwright;
+﻿using Microsoft.Playwright;
 
 namespace TrippleZero.Utils
 {
-  public class TestBase:IAsyncLifetime
+    public class TestBase : IAsyncLifetime
     {
         protected IPlaywright _playwright;
         protected IBrowser _browser;

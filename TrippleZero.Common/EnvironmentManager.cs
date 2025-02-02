@@ -18,7 +18,7 @@ namespace TrippleZero.Common
 
             _configurationDictionary = new Lazy<Dictionary<string, string>>(() =>
             {
-                 
+
                 var environment = configuration["Environment"];
                 if (string.IsNullOrEmpty(environment))
                 {
@@ -33,8 +33,8 @@ namespace TrippleZero.Common
 
                 var keyPair = section.AsEnumerable()
                                       .Where(kv => !string.IsNullOrEmpty(kv.Value))
-                                      .ToDictionary(kv => kv.Key.Replace($"{environment}:", "", 
-                                      StringComparison.OrdinalIgnoreCase), kv => kv.Value ?? 
+                                      .ToDictionary(kv => kv.Key.Replace($"{environment}:", "",
+                                      StringComparison.OrdinalIgnoreCase), kv => kv.Value ??
                                       string.Empty, StringComparer.OrdinalIgnoreCase);
                 keyPair.Add("Environment", environment);
                 return keyPair;

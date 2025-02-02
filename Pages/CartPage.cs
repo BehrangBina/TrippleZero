@@ -6,7 +6,7 @@ namespace TrippleZero.Pages
     {
         private readonly IPage _page;
         private ScenarioContext _scenarioContext;
-        private ILogger _logger;     
+        private ILogger _logger;
         private string ItemPrice = "[data-test='inventory-item-price']";
         private string ItemName = "[data-test='inventory-item-name']";
         private string Checkoout = "[data-test='checkout']";
@@ -37,7 +37,7 @@ namespace TrippleZero.Pages
         }
 
         internal async Task CheckCheckoutButton()
-        {            
+        {
             var checkoutButton = await _page.QuerySelectorAsync(Checkoout);
             checkoutButton.Should().NotBeNull("Checkout button should be visible");
         }

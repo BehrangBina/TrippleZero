@@ -144,24 +144,29 @@ this.ScenarioInitialize(scenarioInfo);
  await testRunner.WhenAsync("I click the checkout button", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 16
- await testRunner.ThenAsync("I should see the checkout page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+ await testRunner.ThenAsync("I am on \"checkout-step-one\" page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                            "First Name",
+                            "Last Name",
+                            "Postal Code"});
+                table1.AddRow(new string[] {
+                            "John",
+                            "Doe",
+                            "3000"});
 #line 17
- await testRunner.AndAsync("I am on \"checkout-step-one\" page", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 18
- await testRunner.WhenAsync("I fill the checkout form", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 19
- await testRunner.AndAsync("I click the continue button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.WhenAsync("I fill the checkout form", ((string)(null)), table1, "When ");
 #line hidden
 #line 20
+ await testRunner.AndAsync("I click the continue button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 21
  await testRunner.ThenAsync("I am on \"checkout-step-two\" page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 22
+#line 23
  await testRunner.ThenAsync("I click on the finish button", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 23
+#line 24
  await testRunner.ThenAsync("I should see the checkout-complete page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

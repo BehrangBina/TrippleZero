@@ -15,11 +15,12 @@ namespace TrippleZero.Pages
         private string ItemPrice = ".inventory_item_price";
         private ScenarioContext _scenarioContext;
 
-        public InventoryPage(IPage page,ScenarioContext ScenarioContext,ILogger logger) {
-            _page = page;         
+        public InventoryPage(IPage page, ScenarioContext ScenarioContext, ILogger logger)
+        {
+            _page = page;
             _scenarioContext = ScenarioContext;
             _logger = logger;
-        } 
+        }
 
         public async Task AddProductToCart(string productName)
         {
@@ -31,8 +32,8 @@ namespace TrippleZero.Pages
                 _scenarioContext.Add("productName", productName);
                 string price = "";
                 var priceElement = await productElement.QuerySelectorAsync(ItemPrice)
-                    ?? throw new Exception($"Prie for the product {productName}");               
-                    price =await priceElement.InnerTextAsync();
+                    ?? throw new Exception($"Prie for the product {productName}");
+                price = await priceElement.InnerTextAsync();
                 _scenarioContext.Add("productPrice", price);
 
                 if (addToCartButton != null)
@@ -45,8 +46,8 @@ namespace TrippleZero.Pages
         {
             var querySelector = $"{ItemContainer}:has-text('{productName}')";
             _logger.LogInformation($"Checking if the button text changes after clicking 'Add to cart' for {productName}");
-            _logger.LogInformation($"Query Selector: {querySelector}"); 
-            var productElement = 
+            _logger.LogInformation($"Query Selector: {querySelector}");
+            var productElement =
                 await _page.QuerySelectorAsync(querySelector
                 ?? throw new Exception($"Could not find {productName} with selector {querySelector}"));
             var addToCartButton = await productElement!.QuerySelectorAsync(AddToCartButton);
@@ -54,7 +55,7 @@ namespace TrippleZero.Pages
             var removeButton = await productElement!.QuerySelectorAsync(RemoveButton);
             removeButton.Should().NotBeNull($" 'Remove' button for {productName} should be visible after addeing to cart");
         }
-        public async Task CheckItemsInCartBadge(int count, ILogger<LoginSteps> _logger)
+        public async Task CheckItemsInCartBadge(int count, ILogger<LoginStepDefinitions> _logger)
         {
             _logger.LogInformation($"Checking if the cart badge shows {count}");
             _logger.LogInformation($"Cart Badge Query Selector: {CartBadge}");

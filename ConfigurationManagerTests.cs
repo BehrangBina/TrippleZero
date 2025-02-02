@@ -24,7 +24,7 @@ namespace TrippleZero
         {
             var value = EnvironmentManager.GetOrThrow(key);
             _logger.LogInformation($"Key: {key}, Value: {value}");
-            value.Should().Be(expectedValue,"Value does not match");   
+            value.Should().Be(expectedValue, "Value does not match");
         }
     }
 }
