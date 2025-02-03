@@ -73,7 +73,9 @@ By adhering to these best practices, the TrippleZero Online Automation Framework
 
 - .NET 9.0 SDK
 - Visual Studio 2022
-
+#### Report
+   dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+   
 ### Installation
 
 1. Clone the repository:
@@ -83,6 +85,8 @@ By adhering to these best practices, the TrippleZero Online Automation Framework
 
 1. Build the solution:
 2. Run the tests:
+* dotnet test --filter Category=Online --logger:trx
+* livingdoc  feature-folder features --output TestResult/TestReport.html
 
 
 ## Contributing
