@@ -45,7 +45,10 @@ This project contains the step definitions and page objects for the automation t
 
 This project contains common utilities and configurations used by the TrippleZero.Online project.
 
+**Can be used in multiple projects: Example Web/Mobile/API**
+
 - **EnvironmentManager**: Manages the configuration settings by loading them from JSON files, environment variables, and command-line arguments.
+
 
 ## Key Features
 
@@ -73,9 +76,14 @@ By adhering to these best practices, the TrippleZero Online Automation Framework
 
 - .NET 9.0 SDK
 - Visual Studio 2022
+
 #### Report
-   dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-   
+```
+✅ Native Support: Works seamlessly with Reqnroll.
+✅ Visual & Interactive: Generates easy-to-read HTML reports.
+✅ Integrates with CI/CD: Can be used in Azure DevOps, Jenkins, GitHub Actions.
+✅ dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+```
 ### Installation
 
 1. Clone the repository:
