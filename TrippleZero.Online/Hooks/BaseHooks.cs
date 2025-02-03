@@ -1,5 +1,4 @@
-﻿
-using TrippleZero.Common;
+﻿using TrippleZero.Common;
 using TrippleZero.Online.StepDefinitions;
 using TrippleZero.Online.Utils;
 
