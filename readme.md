@@ -130,8 +130,10 @@ By adhering to these best practices, the TrippleZero Online Automation Framework
 2. Open the solution in Visual Studio 2022.
 
 ### Running Tests
-
-1. Build the solution:
+ ``` run run.bat in cli ```
+1. Build the solution: 
+* dotnet clean 
+* donet build
 2. Run the tests:
 * dotnet test --filter Category=Online --logger:trx
 * livingdoc  feature-folder features --output TestResult/TestReport.html
