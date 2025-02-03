@@ -5,15 +5,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="xunit" Version="2.9.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
-  </ItemGroup>
-
+  </PropertyGroup> 
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="8.0.1" />
+		<PackageReference Include="FluentValidation" Version="11.11.0" />
+		<PackageReference Include="MartinCostello.Logging.XUnit" Version="0.5.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="9.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="Microsoft.Playwright" Version="1.49.0" />
+		<PackageReference Include="Reqnroll" Version="2.2.1" />
+		<PackageReference Include="Reqnroll.xUnit" Version="2.2.1" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup> 
+	<ItemGroup>
+	  <ProjectReference Include="..\TrippleZero.Common\TrippleZero.Common.csproj" />
+	</ItemGroup>
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
