@@ -4,6 +4,18 @@
 
 The TrippleZero Online Automation Framework is designed to automate the end-to-end testing of the TrippleZero online shopping platform. It leverages modern tools and practices to ensure scalability, maintainability, and robustness.
 
+## Assumptions
+1. Login
+   - Only Testing with Stardard User 
+2. ProductPurchase
+   - Only Cover one Product to cart at this stage
+   - We know what are the required validation in checkout step 2
+       - Product name
+       - Product price
+       - Information label and text
+       - Shipping Label and text
+       - Total Element  (excluding tax calculation)
+
 ## Project Structure
 ```
 TrippleZero.Online/
@@ -40,6 +52,34 @@ This project contains the step definitions and page objects for the automation t
 - **StepDefinitions**: Contains the step definitions for the BDD scenarios.
 - **Pages**: Contains the page objects representing the different pages of the application.
 - **Utils**: Contains utility classes and methods used across the project.
+
+## Framework Design:
+
+1.	**FluentAssertions**
+*	Purpose: Provides a more readable and fluent way to write assertions in tests.
+*	Usage: Used in step definitions and page objects to assert conditions in a human-readable manner.
+*	Example: currentUrl.Should().Contain(pageName, "Current url does not contain the expected page name");
+2.	**Microsoft.Extensions.Logging**
+*	Purpose: Provides a logging framework to log information, warnings, and errors.
+*	Usage: Used in step definitions and page objects to log important information and errors for debugging and tracking purposes.
+*	Example: _logger.LogInformation("Checking if user is in the inventory page");
+3.	**Reqnroll**
+*	Purpose: A BDD framework for .NET that uses Gherkin syntax for writing test scenarios.
+*	Usage: Used to define feature files and step definitions for BDD-style tests.
+*	Example: Feature: ProductPurchase
+*	Purpose: A library for handling HTTP requests and responses.
+*	Usage: Used for making HTTP requests and handling responses, typically in utility classes or step definitions that require API interactions.
+*	Example: var response = await _httpClient.GetAsync("api/endpoint");
+4.	**Xunit.Abstractions**
+*	Purpose: Provides interfaces for xUnit test framework, particularly for output logging.
+*	Usage: Used in step definitions to log test output using the ITestOutputHelper interface.
+*	Example: public ProductPurchaseStepDefinitions(ScenarioContext scenarioContext, ITestOutputHelper output)
+5.	**Playwright**
+*	Purpose: A browser automation library for end-to-end testing.
+*	Usage: Used to interact with web pages, perform actions, and verify conditions in the browser.
+*	Example: await _page.ClickAsync("#button");
+
+
 
 ### TrippleZero.Common
 
