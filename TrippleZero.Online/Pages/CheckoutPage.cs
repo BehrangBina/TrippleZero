@@ -2,6 +2,9 @@
 
 namespace TrippleZero.Online.Pages
 {
+    /// <summary>
+    /// Represents the checkout page of the application.
+    /// </summary>
     internal class CheckoutPage
     {
         private readonly IPage _page;
@@ -21,11 +24,14 @@ namespace TrippleZero.Online.Pages
         private const string FinishButton = "[data-test='finish']";
         private const string TotalInfoLabel = "[data-test='total-info-label']";
         private const string TotalInfoValue = "[data-test='subtotal-label']";
-        //     private const string ItemTotal = "[data-test='subtotal-label']";
-        //     private const string Tax = "[data-test='tax-label']";
         private const string TaxLabel = "[data-test='tax-label']";
-        private const string TotalLabel = "[data-test='total-label']";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CheckoutPage"/> class.
+        /// </summary>
+        /// <param name="page">The Playwright page instance.</param>
+        /// <param name="ScenarioContext">The scenario context.</param>
+        /// <param name="logger">The logger instance.</param>
         public CheckoutPage(IPage page, ScenarioContext ScenarioContext, ILogger logger)
         {
             _page = page;
@@ -33,6 +39,13 @@ namespace TrippleZero.Online.Pages
             _logger = logger;
         }
 
+        /// <summary>
+        /// Fills the checkout form with the provided details.
+        /// </summary>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="lastName">The last name.</param>
+        /// <param name="postalCode">The postal code.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         internal async Task FillCheckoutForm(string firstName, string lastName, string postalCode)
         {
             await FillFirstName(firstName);
@@ -40,38 +53,69 @@ namespace TrippleZero.Online.Pages
             await FillPostalCode(postalCode);
         }
 
+        /// <summary>
+        /// Clicks the continue button on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         internal async Task ClickContinueOnCheckout() => await ClickContinue();
 
+        /// <summary>
+        /// Fills the first name field.
+        /// </summary>
+        /// <param name="firstName">The first name.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task FillFirstName(string firstName)
         {
             _logger.LogInformation($"Filling First Name: {firstName}");
             await _page.Locator(FirstName).FillAsync(firstName);
         }
 
+        /// <summary>
+        /// Fills the last name field.
+        /// </summary>
+        /// <param name="lastName">The last name.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task FillLastName(string lastName)
         {
             _logger.LogInformation($"Filling Last Name: {lastName}");
             await _page.Locator(LastName).FillAsync(lastName);
         }
 
+        /// <summary>
+        /// Fills the postal code field.
+        /// </summary>
+        /// <param name="postalCode">The postal code.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task FillPostalCode(string postalCode)
         {
             _logger.LogInformation($"Filling PostCode: {postalCode}");
             await _page.Locator(PostCode).FillAsync(postalCode);
         }
 
+        /// <summary>
+        /// Clicks the continue button.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ClickContinue()
         {
             _logger.LogInformation("Clicking Continue");
             await _page.Locator(Continue).ClickAsync();
         }
 
+        /// <summary>
+        /// Clicks the finish button on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         internal async Task ClickFinish()
         {
             _logger.LogInformation("Clicking finish button");
             await _page.Locator(FinishButton).ClickAsync();
         }
 
+        /// <summary>
+        /// Validates the elements on the second page of the checkout.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         internal async Task ValidateCheckoutSecondPage()
         {
             await ValidateProductName();
@@ -79,9 +123,12 @@ namespace TrippleZero.Online.Pages
             await ValidateIformationElements();
             await ValidateShippingInformationElements();
             await VaidateTotalElements();
-
         }
 
+        /// <summary>
+        /// Validates the total elements on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task VaidateTotalElements()
         {
             _logger.LogInformation("Validating Total Elements");
@@ -102,10 +149,12 @@ namespace TrippleZero.Online.Pages
             taxLabel = taxLabel.Replace("Tax: $", "").Trim();
             decimal.TryParse(taxLabel, out taxValue);
             taxValue.Should().BeGreaterThan(0, "Tax value should be greater than 0");
-
-
         }
 
+        /// <summary>
+        /// Validates the shipping information elements on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ValidateShippingInformationElements()
         {
             var shippingLabel = await _page.Locator(ShoppingInfoLable).TextContentAsync();
@@ -116,6 +165,10 @@ namespace TrippleZero.Online.Pages
             shippingLabelValue.Trim().Should().Be("Free Pony Express Delivery!", $"Shipping Information value on page: {shippingLabelValue} does not match FREE PONY EXPRESS DELIVERY!");
         }
 
+        /// <summary>
+        /// Validates the payment information elements on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ValidateIformationElements()
         {
             var infoLabel = await _page.Locator(InformationLabel).TextContentAsync();
@@ -127,37 +180,28 @@ namespace TrippleZero.Online.Pages
             infoLabel.Trim().Should().Be("Payment Information:", $"Payment Information label on page: {infoLabel} does not");
             infoLabelValue.Trim()
                 .Length.Should().BeGreaterThan("SauceCard #".Length, $"Payment Information value on page: {infoLabelValue} does not match SauceCard #1-9");
-
         }
 
+        /// <summary>
+        /// Validates the product name on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ValidateProductName()
         {
             var productName = _scenarioContext.Get<string>("productName");
             var productNameOnPage = await _page.Locator(ProductName).TextContentAsync();
             productNameOnPage.Should().Be(productName, $"Product name on page: {productNameOnPage} does not match {productName}");
         }
+
+        /// <summary>
+        /// Validates the product price on the checkout page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ValidateProductPrice()
         {
             var productPrice = _scenarioContext.Get<string>("productPrice");
             var productPriceOnPage = await _page.Locator(ProductContainerPrice).TextContentAsync();
             productPriceOnPage.Should().Be(productPrice, $"Product price on page: {productPriceOnPage} does not match {productPrice}");
         }
-
-
     }
 }
-// _logger.LogInformation("Validating Checkout Second Page");
-//await _page.Locator(ProductName).ShouldNotExistAsync();
-//await _page.Locator(ProductContainerPrice).ShouldNotExistAsync();
-//await _page.Locator(InformationLabel).ShouldNotExistAsync();
-//await _page.Locator(InformationLabelValue).ShouldNotExistAsync();
-//await _page.Locator(ShoppingInfoLable).ShouldNotExistAsync();
-//await _page.Locator(ShoppingInfoLableValue).ShouldNotExistAsync();
-//await _page.Locator(FinishButton).ShouldNotExistAsync();
-//await _page.Locator(TotalInfoLabel).ShouldNotExistAsync();
-//await _page.Locator(TotalInfoValue).ShouldNotExistAsync();
-//await _page.Locator(PriceInfoLabel).ShouldNotExistAsync();
-//await _page.Locator(ItemTotal).ShouldNotExistAsync();
-//await _page.Locator(Tax).ShouldNotExistAsync();
-//await _page.Locator(TaxLabel).ShouldNotExistAsync();
-//await _page.Locator(TotalLabel).ShouldNotExistAsync();

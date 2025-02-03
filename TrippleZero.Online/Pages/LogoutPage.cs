@@ -3,6 +3,9 @@ using TrippleZero.Online.Utils;
 
 namespace TrippleZero.Online.Pages
 {
+    /// <summary>
+    /// Represents the Logout page of the application.
+    /// </summary>
     internal class LogoutPage
     {
         private readonly IPage _page;

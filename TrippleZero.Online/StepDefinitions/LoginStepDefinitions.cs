@@ -1,8 +1,12 @@
+using Microsoft.Playwright;
 using TrippleZero.Common;
 using TrippleZero.Online.Pages;
 using TrippleZero.Online.Utils;
 namespace TrippleZero.Online.StepDefinitions
 {
+    /// <summary>
+    /// Step definitions for login feature.
+    /// </summary>
     [Binding]
     public class LoginStepDefinitions : TestBase
     {
@@ -10,15 +14,25 @@ namespace TrippleZero.Online.StepDefinitions
         private ILogger<LoginStepDefinitions> _logger;
         private static string _browserType = EnvironmentManager.GetOrThrow("BrowserType");
         private ScenarioContext _scenarioContext;
-        public LoginStepDefinitions(ScenarioContext scenarioContext, ITestOutputHelper output) : base(_browserType) // You can change "chromium" to any browser type you want to use
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginStepDefinitions"/> class.
+        /// </summary>
+        /// <param name="scenarioContext">The scenario context.</param>
+        /// <param name="output">The test output helper.</param>
+        public LoginStepDefinitions(ScenarioContext scenarioContext, ITestOutputHelper output) : base(_browserType)
         {
             _logger = output.ToLogger<LoginStepDefinitions>();
             _logger.LogInformation($"Browser Type: {_browserType}");
             InitializeAsync().GetAwaiter().GetResult();
-            _loginPage = new LoginPage(_page);
             _scenarioContext = scenarioContext;
+            _loginPage = new LoginPage(_page ?? _scenarioContext.Get<IPage>("currentPage"), _scenarioContext, _logger);     
+       
         }
 
+        /// <summary>
+        /// Navigates to the login page.
+        /// </summary>
         [Given("I navigate to the login page")]
         public async Task GivenINavigateToTheLoginPage()
         {
@@ -27,6 +41,9 @@ namespace TrippleZero.Online.StepDefinitions
             await _page.GotoAsync(url);
         }
 
+        /// <summary>
+        /// Enters valid username and password.
+        /// </summary>
         [When("I enter valid username and password")]
         public async Task WhenIEnterValidUsernameAndPassword()
         {
@@ -37,6 +54,9 @@ namespace TrippleZero.Online.StepDefinitions
             await _loginPage.EnterPassword(password);
         }
 
+        /// <summary>
+        /// Enters invalid username and password.
+        /// </summary>
         [When("I enter invalid username and password")]
         public async Task WhenIEnterInvalidUsernameAndPassword()
         {
@@ -44,6 +64,9 @@ namespace TrippleZero.Online.StepDefinitions
             await _loginPage.EnterPassword("invalid_password");
         }
 
+        /// <summary>
+        /// Clicks the login button.
+        /// </summary>
         [When("I click the login button")]
         public async Task WhenIClickTheLoginButton()
         {
@@ -52,6 +75,9 @@ namespace TrippleZero.Online.StepDefinitions
             _scenarioContext.Add("currentPage", _page);
         }
 
+        /// <summary>
+        /// Verifies redirection to the inventory page.
+        /// </summary>
         [Then("I should be redirected to the inventory page")]
         public void ThenIShouldBeRedirectedToTheInventoryPage()
         {
@@ -59,6 +85,9 @@ namespace TrippleZero.Online.StepDefinitions
             expectedUrl.Should().Be(_page.Url, $"Url should be {expectedUrl}");
         }
 
+        /// <summary>
+        /// Verifies the presence of an error message.
+        /// </summary>
         [Then("I should see an error message")]
         public async Task ThenIShouldSeeAnErrorMessage()
         {
